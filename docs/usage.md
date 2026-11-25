@@ -1,6 +1,6 @@
 # Usage
 
-Specs of Theseus ships as a plugin called `theseus` for Codex and Claude Code, with a skill for each stage. You work with the agent the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
+Specs of Theseus ships as a plugin called `theseus` for Codex, Cursor, and Claude Code, with a skill for each stage. You work with the agent the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
 
 ## Install
 
@@ -55,6 +55,24 @@ codex plugin add theseus@specs-of-theseus
 
 Codex uses the catalog in `.agents/plugins/marketplace.json`. See [Codex plugin marketplaces](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli).
 
+### Cursor
+
+From a terminal, add the remote marketplace:
+
+```sh
+agent plugin marketplace add https://github.com/kfitzpatrick/specs_of_theseus
+```
+
+Then run `agent`, type `/plugin`, open the **Marketplace** tab, choose `theseus`, and install it. Choose user scope to use it across projects, or project scope for the current project. User installations also sync to the Cursor IDE. See [Cursor's installation instructions](https://forum.cursor.com/t/unable-to-find-a-cli-command-to-install-a-cursor-plugin-after-adding-its-marketplace-repository/166016).
+
+**To update** the marketplace:
+
+```sh
+agent plugin marketplace update specs-of-theseus
+```
+
+A team can also import the repository through **Dashboard → Plugins & MCPs → Team Marketplaces → Add Marketplace → Import from Repo**. Team marketplaces require a Teams or Enterprise plan. See [Cursor team marketplaces](https://cursor.com/docs/plugins#team-marketplaces).
+
 ## The Skills
 
 | Skill | Stage | Runs when |
@@ -71,7 +89,7 @@ Codex uses the catalog in `.agents/plugins/marketplace.json`. See [Codex plugin 
 ## How to Use the Skills
 
 - **You don't have to name them.** Say what you want, such as "break the checkout epic into stories" or "let's start the next story", and the agent picks the matching skill.
-- **You _can_ name one** to be explicit: `/theseus:update-evals` in Claude Code. In Codex, select `update-evals` from the skill picker.
+- **You _can_ name one** to be explicit: `/theseus:update-evals` in Claude Code. In Codex, select `update-evals` from the skill picker. In Cursor, type `/` and search for `update-evals`.
 - **When in doubt, ask "what's next?"** 
   - The entry skill reads the project's files, says which stage the work is in and why, and hands off to the next skill.
   - "Next: **Update Evals** (`theseus:update-evals`)". The skill announces this way, so you always know which one is running.

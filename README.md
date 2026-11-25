@@ -21,7 +21,7 @@ Each is explained in [docs/index.md](docs/index.md#principles).
 
 ## Skills
 
-The skills ship as the `theseus` plugin for Codex and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex loads the `skills/` directory. Claude Code uses the `.claude-plugin/` manifests.
+The skills ship as the `theseus` plugin for Codex, Cursor, and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex and Cursor load the same `skills/` directory. Claude Code uses the `.claude-plugin/` manifests.
 
 Install it in Claude Code with:
 
@@ -35,6 +35,8 @@ Install it in Codex with:
 codex plugin marketplace add kfitzpatrick/specs_of_theseus
 codex plugin add theseus@specs-of-theseus
 ```
+
+In Cursor, add the remote marketplace with `agent plugin marketplace add https://github.com/kfitzpatrick/specs_of_theseus`, then run `agent` and use `/plugin` to install `theseus` from the Marketplace tab. [docs/usage.md](docs/usage.md#cursor) has the steps.
 
 [docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.agents/plugins/marketplace.json` for Codex and `.claude-plugin/marketplace.json` for Claude Code.
 
