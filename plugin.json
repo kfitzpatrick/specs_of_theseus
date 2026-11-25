@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "theseus",
+  "description": "Specs of Theseus: a method for people and agents to build software together. Product planning, evals as the durable spec, per-story redesign, and a strict development loop, drawn from Pivotal Labs' XP and Chad Fowler's Phoenix Architecture.",
+  "version": "0.4.1",
+  "license": "MIT",
+  "author": {
+    "name": "Davis W. Frank"
+  },
+  "homepage": "https://dwf.bigpencil.net/specs_of_theseus/",
+  "repository": "https://github.com/infews/specs_of_theseus"
+}

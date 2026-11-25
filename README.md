@@ -21,7 +21,7 @@ Each is explained in [docs/index.md](docs/index.md#principles).
 
 ## Skills
 
-The skills ship as a Claude Code plugin, `theseus`, versioned in `.claude-plugin/plugin.json`.
+The skills ship as the `theseus` plugin for Codex, Cursor, and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex and Cursor load the same `skills/` directory. Claude Code uses the `.claude-plugin/` manifests.
 
 Install it in Claude Code with:
 
@@ -29,7 +29,16 @@ Install it in Claude Code with:
 /plugin install theseus --marketplace infews/specs_of_theseus
 ```
 
-[docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.claude-plugin/marketplace.json`.
+Install it in Codex with:
+
+```sh
+codex plugin marketplace add kfitzpatrick/specs_of_theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+In Cursor, add the remote marketplace with `agent plugin marketplace add https://github.com/kfitzpatrick/specs_of_theseus`, then run `agent` and use `/plugin` to install `theseus` from the Marketplace tab. [docs/usage.md](docs/usage.md#cursor) has the steps.
+
+[docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.agents/plugins/marketplace.json` for Codex and `.claude-plugin/marketplace.json` for Claude Code.
 
 | Skill | Use when |
 | --- | --- |
@@ -43,6 +52,8 @@ Install it in Claude Code with:
 Acceptance has no skill; it depends on each team's process.
 
 The skills restate much of `docs/`: the docs explain the method to people, the skills tell agents what to do. Change both together.
+
+Keep the identity and version in `plugin.json` and `.claude-plugin/plugin.json` aligned. Both packages use the same skill files and references.
 
 ### Shared references
 

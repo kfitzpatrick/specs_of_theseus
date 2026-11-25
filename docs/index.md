@@ -37,7 +37,7 @@ Specs of Theseus borrows from:
 - [Subsystems](subsystems.md) — the code units underneath the system; an agent modifies, deletes, and regrows the subsystems.
 - [Working Agreements](working-agreements.md) — raising issues, tools, and commits with tags.
 - [Where Things Live](where-things-live.md) — writing epics, stories, and evals then storing them in the repo.
-- [Usage](usage.md) — installing the `theseus` Claude Code plugin and working with its skills.
+- [Usage](usage.md) — installing the `theseus` plugin in Codex, Cursor, or Claude Code and working with its skills.
 - [Adopting an Existing Project](6_adopting.md) — preparing the project and then writing the first evals for a project that has none. 
 - [About](about.md) — who wrote this, and where to find more.
 
