@@ -1,0 +1,20 @@
+{
+  "name": "specs-of-theseus",
+  "interface": {
+    "displayName": "Specs of Theseus"
+  },
+  "plugins": [
+    {
+      "name": "theseus",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
