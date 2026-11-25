@@ -1,8 +1,21 @@
 # Usage
 
-Specs of Theseus ships as a Claude Code plugin called `theseus`, with a skill for each stage. You work with Claude the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
+Specs of Theseus ships as a plugin called `theseus` for Codex, Cursor, and Claude Code, with a skill for each stage. You work with the agent the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
 
 ## Install
+
+### Shared skills without a plugin
+
+Codex and Cursor also discover project skills in `.agents/skills/`. To use the skills directly, copy each complete skill directory from this checkout:
+
+```sh
+mkdir -p /path/to/target-project/.agents/skills
+cp -R /path/to/specs_of_theseus/skills/. /path/to/target-project/.agents/skills/
+```
+
+Commit the copied directories to share them with the team. Start a new chat after installation. Repeat the copy to update. The references and scripts must stay with each `SKILL.md`. See [Codex skills](https://developers.openai.com/codex/skills) and [Cursor skills](https://cursor.com/docs/skills).
+
+### Claude Code
 
 In Claude Code, in the project you want to use the method on:
 
@@ -33,6 +46,37 @@ claude plugin marketplace update specs-of-theseus
 claude plugin update theseus@specs-of-theseus
 ```
 
+### Codex
+
+The root `plugin.json` follows the [Agent Plugins standard](https://agent-plugins.org/). Codex discovers the six skills in `skills/`. The catalog in `.agents/plugins/marketplace.json` makes this checkout a Codex marketplace.
+
+From a terminal, register your checkout and install the plugin:
+
+```sh
+codex plugin marketplace add /path/to/specs_of_theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+Start a new chat in the target project. Ask to use `specs-of-theseus`, or select the skill from the skill picker.
+
+After these changes reach the remote repository, you can register it with `codex plugin marketplace add infews/specs_of_theseus`. Refresh that source with `codex plugin marketplace upgrade specs-of-theseus`.
+
+For desktop installation, restart the app after registering the marketplace. Open the Plugins Directory, choose **Specs of Theseus**, and install `theseus`. Local catalogs and installation controls can vary by client. See [Codex plugin packaging and marketplaces](https://developers.openai.com/plugins/build/plugins).
+
+### Cursor
+
+Cursor supports the same root `plugin.json` and `skills/` layout. From this checkout, copy the package into Cursor's local plugin directory:
+
+```sh
+mkdir -p ~/.cursor/plugins/local/theseus
+cp plugin.json ~/.cursor/plugins/local/theseus/
+cp -R skills ~/.cursor/plugins/local/theseus/
+```
+
+Run **Developer: Reload Window**, then open **Customize** to check the six skills. Local plugin imports must be enabled. To update, copy the current package files again and reload Cursor. See [Cursor's local plugin instructions](https://cursor.com/docs/plugins#test-plugins-locally).
+
+Team marketplaces can distribute this same package. See [Cursor's team marketplace instructions](https://cursor.com/docs/plugins#team-marketplaces).
+
 ## The Skills
 
 | Skill | Stage | Runs when |
@@ -48,8 +92,8 @@ claude plugin update theseus@specs-of-theseus
 
 ## How to Use the Skills
 
-- **You don't have to name them.** Say what you want, such as "break the checkout epic into stories" or "let's start the next story", and Claude picks the matching skill.
-- **You _can_ name one** to be explicit: `/theseus:update-evals`.
+- **You don't have to name them.** Say what you want, such as "break the checkout epic into stories" or "let's start the next story", and the agent picks the matching skill.
+- **You _can_ name one** to be explicit: `/theseus:update-evals` in Claude Code. In Codex, select `update-evals` from the skill picker. In Cursor, type `/` and search for `update-evals`.
 - **When in doubt, ask "what's next?"** 
   - The entry skill reads the project's files, says which stage the work is in and why, and hands off to the next skill.
   - "Next: **Update Evals** (`theseus:update-evals`)". The skill announces this way, so you always know which one is running.
@@ -59,7 +103,7 @@ claude plugin update theseus@specs-of-theseus
 
 ## Getting Going
 
-**A new project:** start with Product Planning. 🧑🏾‍⚖️ The product manager chooses the first epic. Then can work with Claude to write it up and break it into stories.
+**A new project:** start with Product Planning. 🧑🏾‍⚖️ The product manager chooses the first epic. Then can work with the agent to write it up and break it into stories.
 
 **An existing project with code but no evals:** say "adopt this project". The `adopt-project` skill surveys the code, records the project's tools, marks subsystems, and writes an adoption epic with the product manager. See [Adopting an Existing Project](6_adopting.md).
 
@@ -75,8 +119,8 @@ claude plugin update theseus@specs-of-theseus
 | Development | "Go." | Works through the tasks test-first, runs the full eval suite, mutation tests and checks, then tags the story `story/<epic>/<story>`. | Nothing, unless it raises an issue. 🧑🏼‍💻 The developer oversees. |
 | Acceptance | n/a| n/a | 🧑🏾‍⚖️ The product manager accepts or rejects the story on working software according to team practices. |
 
-If the product manager rejects a story, tell Claude why ("the product manager rejected the login story: it should remember the email"). It goes back to Product Planning to be re-ranked, and usually its evals get fixed.
+If the product manager rejects a story, tell the agent why ("the product manager rejected the login story: it should remember the email"). It goes back to Product Planning to be re-ranked, and usually its evals get fixed.
 
 ## The Agent Can Stop and Ask for Help
 
-When the agent is stuck, or finds something it can't settle on its own, it raises an issue. It writes the issue into the story's `## Issues` section (or the epic's `## Open Questions`), stops, and tells you in the session. Work on that story stops until a person writes an answer under the issue and marks it resolved. You can answer in the file, or tell Claude the answer and have it write it down. See [Issues](working-agreements.md#issues).
+When the agent is stuck, or finds something it can't settle on its own, it raises an issue. It writes the issue into the story's `## Issues` section (or the epic's `## Open Questions`), stops, and tells you in the session. Work on that story stops until a person writes an answer under the issue and marks it resolved. You can answer in the file, or tell the agent the answer and have it write it down. See [Issues](working-agreements.md#issues).

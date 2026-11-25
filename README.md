@@ -21,7 +21,16 @@ Each is explained in [docs/index.md](docs/index.md#principles).
 
 ## Skills
 
-The skills ship as a Claude Code plugin, `theseus`, versioned in `.claude-plugin/plugin.json`.
+The skills ship as the `theseus` plugin for Codex, Cursor, and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex and Cursor load the same `skills/` directory. Claude Code uses the existing `.claude-plugin/` manifests.
+
+**Codex:** register this checkout as a marketplace, then install `theseus`:
+
+```sh
+codex plugin marketplace add /path/to/specs_of_theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+**Cursor:** copy `plugin.json` and `skills/` into `~/.cursor/plugins/local/theseus/`, then reload Cursor.
 
 Install it in Claude Code with:
 
@@ -29,7 +38,7 @@ Install it in Claude Code with:
 /plugin install theseus --marketplace infews/specs_of_theseus
 ```
 
-[docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.claude-plugin/marketplace.json`.
+[docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.agents/plugins/marketplace.json` for Codex and `.claude-plugin/marketplace.json` for Claude Code.
 
 | Skill | Use when |
 | --- | --- |
@@ -44,6 +53,8 @@ Acceptance has no skill; it depends on each team's process.
 
 The skills restate much of `docs/`: the docs explain the method to people, the skills tell agents what to do. Change both together.
 
+Keep the identity and version in `plugin.json` and `.claude-plugin/plugin.json` aligned. Both packages use the same skill files and references.
+
 ### Shared references
 
 Several skills need the same material: evals, subsystems, project layout, working agreements, and the eval-link checker. Each skill carries its own copy so it works on its own. The originals live in `skills/specs-of-theseus/references/` and `skills/specs-of-theseus/scripts/` — **edit those, never the copies** — then run:
@@ -56,7 +67,9 @@ bin/sync-skill-references
 
 ## Trying the skills
 
-Load the plugin from this checkout for one session, in the project you're testing on:
+For Codex and Cursor, follow the local installation steps in [docs/usage.md](docs/usage.md).
+
+In Claude Code, load the plugin from this checkout for one session, in the project you're testing on:
 
 ```sh
 claude --plugin-dir /path/to/specs-of-theseus
