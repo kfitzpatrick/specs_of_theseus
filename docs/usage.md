@@ -4,17 +4,6 @@ Specs of Theseus ships as a plugin called `theseus` for Codex, Cursor, and Claud
 
 ## Install
 
-### Shared skills without a plugin
-
-Codex and Cursor also discover project skills in `.agents/skills/`. To use the skills directly, copy each complete skill directory from this checkout:
-
-```sh
-mkdir -p /path/to/target-project/.agents/skills
-cp -R /path/to/specs_of_theseus/skills/. /path/to/target-project/.agents/skills/
-```
-
-Commit the copied directories to share them with the team. Start a new chat after installation. Repeat the copy to update. The references and scripts must stay with each `SKILL.md`. See [Codex skills](https://developers.openai.com/codex/skills) and [Cursor skills](https://cursor.com/docs/skills).
-
 ### Claude Code
 
 In Claude Code, in the project you want to use the method on:
@@ -48,34 +37,41 @@ claude plugin update theseus@specs-of-theseus
 
 ### Codex
 
-The root `plugin.json` follows the [Agent Plugins standard](https://agent-plugins.org/). Codex discovers the six skills in `skills/`. The catalog in `.agents/plugins/marketplace.json` makes this checkout a Codex marketplace.
-
-From a terminal, register your checkout and install the plugin:
+From a terminal, add the remote marketplace, then install:
 
 ```sh
-codex plugin marketplace add /path/to/specs_of_theseus
+codex plugin marketplace add kfitzpatrick/specs_of_theseus
 codex plugin add theseus@specs-of-theseus
 ```
 
-Start a new chat in the target project. Ask to use `specs-of-theseus`, or select the skill from the skill picker.
+Then start a new chat in the project you want to use the method on.
 
-After these changes reach the remote repository, you can register it with `codex plugin marketplace add infews/specs_of_theseus`. Refresh that source with `codex plugin marketplace upgrade specs-of-theseus`.
+**To update** to the latest version:
 
-For desktop installation, restart the app after registering the marketplace. Open the Plugins Directory, choose **Specs of Theseus**, and install `theseus`. Local catalogs and installation controls can vary by client. See [Codex plugin packaging and marketplaces](https://developers.openai.com/plugins/build/plugins).
+```sh
+codex plugin marketplace upgrade specs-of-theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+Codex uses the catalog in `.agents/plugins/marketplace.json`. See [Codex plugin marketplaces](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli).
 
 ### Cursor
 
-Cursor supports the same root `plugin.json` and `skills/` layout. From this checkout, copy the package into Cursor's local plugin directory:
+From a terminal, add the remote marketplace:
 
 ```sh
-mkdir -p ~/.cursor/plugins/local/theseus
-cp plugin.json ~/.cursor/plugins/local/theseus/
-cp -R skills ~/.cursor/plugins/local/theseus/
+agent plugin marketplace add https://github.com/kfitzpatrick/specs_of_theseus
 ```
 
-Run **Developer: Reload Window**, then open **Customize** to check the six skills. Local plugin imports must be enabled. To update, copy the current package files again and reload Cursor. See [Cursor's local plugin instructions](https://cursor.com/docs/plugins#test-plugins-locally).
+Then run `agent`, type `/plugin`, open the **Marketplace** tab, choose `theseus`, and install it. Choose user scope to use it across projects, or project scope for the current project. User installations also sync to the Cursor IDE. See [Cursor's installation instructions](https://forum.cursor.com/t/unable-to-find-a-cli-command-to-install-a-cursor-plugin-after-adding-its-marketplace-repository/166016).
 
-Team marketplaces can distribute this same package. See [Cursor's team marketplace instructions](https://cursor.com/docs/plugins#team-marketplaces).
+**To update** the marketplace:
+
+```sh
+agent plugin marketplace update specs-of-theseus
+```
+
+A team can also import the repository through **Dashboard → Plugins & MCPs → Team Marketplaces → Add Marketplace → Import from Repo**. Team marketplaces require a Teams or Enterprise plan. See [Cursor team marketplaces](https://cursor.com/docs/plugins#team-marketplaces).
 
 ## The Skills
 

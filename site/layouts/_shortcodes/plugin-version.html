@@ -1,4 +1,4 @@
-{{- /* The theseus plugin's version, read from the root plugin.json (mounted
+{{- /* The theseus plugin's version, read from .claude-plugin/plugin.json (mounted
      as assets/plugin.json in hugo.toml), so the docs never carry a copy of it. */ -}}
 {{- with resources.Get "plugin.json" -}}
   {{- (. | transform.Unmarshal).version -}}

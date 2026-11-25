@@ -47,8 +47,6 @@ The slower, story-wide checks run once, on the finished story. A failure in eith
 
 Tell the developer the story is complete and tagged, with a short summary of the mutation testing — survivors killed, and any equivalent mutants recorded. The tagged story now goes to the team's Acceptance process, which is outside these skills. Once it's deployed, the work queue is empty and the next story can start in `update-evals`.
 
-Resolve `scripts/check-eval-links.sh` from this installed skill directory. Run it with Bash and the target project root: `bash "<skill-directory>/scripts/check-eval-links.sh" "<project-root>"`.
-
 ## Commits
 
 Commit straight to main. If work-in-progress commits help, use a short-lived branch and squash and rebase it onto main before it lands, so main's history stays linear. No merge commits. Start each commit message with the story's short ID, such as `e0001.s0010: add the login form` (see "Commits and story tags" in `references/working-agreements.md`).

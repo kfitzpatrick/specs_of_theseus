@@ -89,8 +89,6 @@ Also sort the area's existing tests: tag the ones that check an eval with its `@
 
 **Complete Story** 🧞 — once the eval-link check passes (`scripts/check-eval-links.sh`), check the story off in the epic's **Resulting Stories**. Characterize stories build nothing, so they skip Redesign System and Development. Go back to Choose Story for the next one. In an adoption epic, when no Characterize stories are left, the system is adopted, and the work queue is empty for the normal flow.
 
-Resolve `scripts/check-eval-links.sh` from this installed skill directory. Run it with Bash and the target project root: `bash "<skill-directory>/scripts/check-eval-links.sh" "<project-root>"`.
-
 ## Raise an issue
 
 In the story's **Issues** section (see `references/working-agreements.md`) when:

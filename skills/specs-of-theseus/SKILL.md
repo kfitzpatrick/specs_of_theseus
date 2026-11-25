@@ -48,8 +48,6 @@ Work this out from the project's files rather than asking — the files are the 
 
 Tell the person which stage you found and why, then invoke that stage's skill by name — "Next: **Update Evals** (`theseus:update-evals`)". Every stage skill announces itself the same way, so the person always knows which one is running.
 
-For Codex and Cursor, find the stage skill by its `name` in `SKILL.md`, such as `update-evals`. Use the host's skill mechanism, or read the installed stage skill's `SKILL.md` and follow it if no invocation tool is available.
-
 ## Shared references
 
 The stage skills point here for the details they share. Read only what the task needs.

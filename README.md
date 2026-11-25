@@ -21,22 +21,22 @@ Each is explained in [docs/index.md](docs/index.md#principles).
 
 ## Skills
 
-The skills ship as the `theseus` plugin for Codex, Cursor, and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex and Cursor load the same `skills/` directory. Claude Code uses the existing `.claude-plugin/` manifests.
-
-**Codex:** register this checkout as a marketplace, then install `theseus`:
-
-```sh
-codex plugin marketplace add /path/to/specs_of_theseus
-codex plugin add theseus@specs-of-theseus
-```
-
-**Cursor:** copy `plugin.json` and `skills/` into `~/.cursor/plugins/local/theseus/`, then reload Cursor.
+The skills ship as the `theseus` plugin for Codex, Cursor, and Claude Code. The root `plugin.json` uses the [Agent Plugins standard](https://agent-plugins.org/). Codex and Cursor load the same `skills/` directory. Claude Code uses the `.claude-plugin/` manifests.
 
 Install it in Claude Code with:
 
 ```
 /plugin install theseus --marketplace infews/specs_of_theseus
 ```
+
+Install it in Codex with:
+
+```sh
+codex plugin marketplace add kfitzpatrick/specs_of_theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+In Cursor, add the remote marketplace with `agent plugin marketplace add https://github.com/kfitzpatrick/specs_of_theseus`, then run `agent` and use `/plugin` to install `theseus` from the Marketplace tab. [docs/usage.md](docs/usage.md#cursor) has the steps.
 
 [docs/usage.md](docs/usage.md) covers installing for a whole team, updating, and how the skills run day to day. The repo is its own marketplace, `specs-of-theseus`, defined in `.agents/plugins/marketplace.json` for Codex and `.claude-plugin/marketplace.json` for Claude Code.
 
@@ -67,9 +67,7 @@ bin/sync-skill-references
 
 ## Trying the skills
 
-For Codex and Cursor, follow the local installation steps in [docs/usage.md](docs/usage.md).
-
-In Claude Code, load the plugin from this checkout for one session, in the project you're testing on:
+Load the plugin from this checkout for one session, in the project you're testing on:
 
 ```sh
 claude --plugin-dir /path/to/specs-of-theseus
