@@ -1,8 +1,10 @@
 # Usage
 
-Specs of Theseus ships as a Claude Code plugin called `theseus`, with a skill for each stage. You work with Claude the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
+Specs of Theseus ships as a plugin called `theseus` for Codex and Claude Code, with a skill for each stage. You work with the agent the usual way, in plain words. The skills tell 🧞 the agent what to do at each step, and make it stop wherever a person decides.
 
 ## Install
+
+### Claude Code
 
 In Claude Code, in the project you want to use the method on:
 
@@ -33,6 +35,26 @@ claude plugin marketplace update specs-of-theseus
 claude plugin update theseus@specs-of-theseus
 ```
 
+### Codex
+
+From a terminal, add the remote marketplace, then install:
+
+```sh
+codex plugin marketplace add kfitzpatrick/specs_of_theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+Then start a new chat in the project you want to use the method on.
+
+**To update** to the latest version:
+
+```sh
+codex plugin marketplace upgrade specs-of-theseus
+codex plugin add theseus@specs-of-theseus
+```
+
+Codex uses the catalog in `.agents/plugins/marketplace.json`. See [Codex plugin marketplaces](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli).
+
 ## The Skills
 
 | Skill | Stage | Runs when |
@@ -48,8 +70,8 @@ claude plugin update theseus@specs-of-theseus
 
 ## How to Use the Skills
 
-- **You don't have to name them.** Say what you want, such as "break the checkout epic into stories" or "let's start the next story", and Claude picks the matching skill.
-- **You _can_ name one** to be explicit: `/theseus:update-evals`.
+- **You don't have to name them.** Say what you want, such as "break the checkout epic into stories" or "let's start the next story", and the agent picks the matching skill.
+- **You _can_ name one** to be explicit: `/theseus:update-evals` in Claude Code. In Codex, select `update-evals` from the skill picker.
 - **When in doubt, ask "what's next?"** 
   - The entry skill reads the project's files, says which stage the work is in and why, and hands off to the next skill.
   - "Next: **Update Evals** (`theseus:update-evals`)". The skill announces this way, so you always know which one is running.
@@ -59,7 +81,7 @@ claude plugin update theseus@specs-of-theseus
 
 ## Getting Going
 
-**A new project:** start with Product Planning. 🧑🏾‍⚖️ The product manager chooses the first epic. Then can work with Claude to write it up and break it into stories.
+**A new project:** start with Product Planning. 🧑🏾‍⚖️ The product manager chooses the first epic. Then can work with the agent to write it up and break it into stories.
 
 **An existing project with code but no evals:** say "adopt this project". The `adopt-project` skill surveys the code, records the project's tools, marks subsystems, and writes an adoption epic with the product manager. See [Adopting an Existing Project](6_adopting.md).
 
@@ -75,8 +97,8 @@ claude plugin update theseus@specs-of-theseus
 | Development | "Go." | Works through the tasks test-first, runs the full eval suite, mutation tests and checks, then tags the story `story/<epic>/<story>`. | Nothing, unless it raises an issue. 🧑🏼‍💻 The developer oversees. |
 | Acceptance | n/a| n/a | 🧑🏾‍⚖️ The product manager accepts or rejects the story on working software according to team practices. |
 
-If the product manager rejects a story, tell Claude why ("the product manager rejected the login story: it should remember the email"). It goes back to Product Planning to be re-ranked, and usually its evals get fixed.
+If the product manager rejects a story, tell the agent why ("the product manager rejected the login story: it should remember the email"). It goes back to Product Planning to be re-ranked, and usually its evals get fixed.
 
 ## The Agent Can Stop and Ask for Help
 
-When the agent is stuck, or finds something it can't settle on its own, it raises an issue. It writes the issue into the story's `## Issues` section (or the epic's `## Open Questions`), stops, and tells you in the session. Work on that story stops until a person writes an answer under the issue and marks it resolved. You can answer in the file, or tell Claude the answer and have it write it down. See [Issues](working-agreements.md#issues).
+When the agent is stuck, or finds something it can't settle on its own, it raises an issue. It writes the issue into the story's `## Issues` section (or the epic's `## Open Questions`), stops, and tells you in the session. Work on that story stops until a person writes an answer under the issue and marks it resolved. You can answer in the file, or tell the agent the answer and have it write it down. See [Issues](working-agreements.md#issues).
